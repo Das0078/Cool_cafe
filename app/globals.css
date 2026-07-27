@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-noto: "Noto Sans", sans-serif;
+  --font-google: "Google Sans", "Plus Jakarta Sans", sans-serif;
+  
+  --color-brand-brown: #110a06;
+  --color-brand-marquee: #b79d8b;
+  
+  --color-slide-1: #985528;
+  --color-slide-2: #d96017;
+  --color-slide-3: #de634c;
+}
+
+body {
+  font-family: var(--font-noto);
+  background-color: var(--color-brand-brown);
+  color: white;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.text-stretch {
+  font-family: var(--font-google);
+  transform: scaleX(2.2) scaleY(2.7);
+  display: inline-block;
+  letter-spacing: -0.02em;
+}

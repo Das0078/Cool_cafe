@@ -1,0 +1,27 @@
+"use client";
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import Loader from '@/components/Loader';
+import Navbar from '@/components/Navbar';
+import Carousel from '@/components/Carousel';
+import CurvyMarquee from '@/components/CurvyMarquee';
+
+export default function Page() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <main className="relative w-full h-screen overflow-hidden bg-[#110a06]">
+      <AnimatePresence>
+        {loading && <Loader onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      {!loading && (
+        <>
+          <Navbar />
+          <Carousel />
+          <CurvyMarquee />
+        </>
+      )}
+    </main>
+  );
+}
