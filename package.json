@@ -18,6 +18,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
     "gsap": "^3.15.0",
+    "liquid-glass-react": "^1.1.1",
     "lucide-react": "^0.553.0",
     "motion": "^12.23.24",
     "motion-utils": "^12.4.7",

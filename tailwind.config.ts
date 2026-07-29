@@ -17,7 +17,7 @@ const config: Config = {
       },
       fontFamily: {
         noto: ['"Noto Sans"', 'sans-serif'],
-        google: ['"Google Sans"', '"Plus Jakarta Sans"', 'sans-serif'],
+        oswald: ['"Oswald"', 'sans-serif'],
       },
     },
   },

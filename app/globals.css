@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-noto: "Noto Sans", sans-serif;
-  --font-google: "Google Sans", "Plus Jakarta Sans", sans-serif;
+  --font-oswald: "Oswald", sans-serif;
   
   --color-brand-brown: #110a06;
   --color-brand-marquee: #b79d8b;
@@ -31,8 +31,14 @@ body {
 }
 
 .text-stretch {
-  font-family: var(--font-google);
-  transform: scaleX(2.2) scaleY(2.7);
+  font-family: var(--font-oswald);
+  transform: scaleX(2.5) scaleY(2.7);
   display: inline-block;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 767px) {
+  .text-stretch {
+    transform: scaleX(1.45) scaleY(2.1);
+  }
 }

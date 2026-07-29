@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import SplitText from './SplitText';
+import CurvedLoop from './CurvedLoop';
 
 const slides = [
   {
@@ -9,7 +10,7 @@ const slides = [
     bgColor: "var(--color-slide-1)",
     title: "COFFEE",
     mainImg: "/assets/Coffee_png.png",
-    floatingImgs: ["/assets/Floating_coffee_beans.png", "/assets/Floating_coffee_beans.png", "/assets/Floating_coffee_beans.png"],
+    floatingImg: "/assets/Floating_coffee_beans.png",
     imageClass: "w-[60vw] md:w-[35vw] max-w-[500px]"
   },
   {
@@ -17,7 +18,7 @@ const slides = [
     bgColor: "var(--color-slide-2)",
     title: "BURGER",
     mainImg: "/assets/Burger_png.png",
-    floatingImgs: ["/assets/Floating_french_fries.png", "/assets/Floating_french_fries.png", "/assets/Floating_french_fries.png"],
+    floatingImg: "/assets/Floating_french_fries.png",
     imageClass: "mt-25 w-[85vw] md:w-[55vw] max-w-[800px]"
   },
   {
@@ -25,13 +26,23 @@ const slides = [
     bgColor: "var(--color-slide-3)",
     title: "MOMO",
     mainImg: "/assets/Momo_png.png",
-    floatingImgs: ["/assets/Floating_momo.png", "/assets/Floating_momo.png", "/assets/Floating_momo.png"],
+    floatingImg: "/assets/Floating_momo.png",
     imageClass: "mt-25 w-[90vw] md:w-[60vw] max-w-[800px]"
   }
 ];
 
 export default function Carousel() {
   const [{ current: currentIndex, prev: prevIndex }, setIndices] = useState({ current: 0, prev: 0 });
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const updateScreenSize = () => setIsSmallScreen(mediaQuery.matches);
+
+    updateScreenSize();
+    mediaQuery.addEventListener('change', updateScreenSize);
+    return () => mediaQuery.removeEventListener('change', updateScreenSize);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -44,7 +55,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+    <div className="relative w-full  h-screen overflow-hidden flex items-center justify-center">
       {/* Background Transition */}
       <AnimatePresence mode="popLayout">
         <motion.div
@@ -71,7 +82,7 @@ export default function Carousel() {
           >
             <SplitText
               text={slides[currentIndex].title}
-              className="text-[12vh] md:text-[16vh] leading-none font-black text-white select-none text-stretch whitespace-nowrap"
+              className="text-[10vh] md:text-[16vh] leading-none font-oswald font-black text-white select-none text-stretch whitespace-nowrap"
               tag="h1"
               delay={40}
               duration={0.5}
@@ -98,6 +109,14 @@ export default function Carousel() {
 
           const isWrapping = Math.abs(prevOffset - offset) > 1;
 
+          // A product returning from the left slot is repositioned on the right
+          // so it never travels across the active product during the wrap.
+          const visualState = isActive
+            ? { x: '0vw', y: isSmallScreen ? '7vh' : '0vh', scale: 1, opacity: 1 }
+            : isLeft
+              ? { x: '-31vw', y: isSmallScreen ? '30vh' : '25vh', scale: 0.34, opacity: 0.9 }
+              : { x: '31vw', y: isSmallScreen ? '30vh' : '25vh', scale: 0.34, opacity: 0.9 };
+
           if (!isActive && !isLeft && !isRight) return null;
 
           return (
@@ -109,11 +128,7 @@ export default function Carousel() {
                 {/* Main Product Image Wrapper */}
                 <motion.div
                   initial={false}
-                  animate={{
-                    x: isActive ? '0%' : isLeft ? '-80%' : '80%',
-                    scale: isActive ? 1 : 0.4,
-                    opacity: isActive ? 1 : 0.6,
-                  }}
+                  animate={visualState}
                   transition={{ duration: isWrapping ? 0 : 0.8, ease: [0.25, 1, 0.5, 1] }}
                   className="absolute flex items-center justify-center w-full h-full"
                 >
@@ -134,31 +149,21 @@ export default function Carousel() {
 
                 {/* Floating Elements */}
                 <AnimatePresence>
-                  {isActive && slide.floatingImgs.map((imgSrc, i) => {
-                    const xPositions = ['-25vw', '25vw', '15vw'];
-                    const yPositions = ['-15vh', '-20vh', '25vh'];
-                    return (
-                      <motion.img
-                        key={i}
-                        src={imgSrc}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ 
-                          opacity: 0.9, 
-                          scale: 1,
-                          x: xPositions[i],
-                          y: yPositions[i],
-                          rotate: [0, 360]
-                        }}
-                        exit={{ opacity: 0, scale: 0 }}
-                        transition={{ 
-                          opacity: { duration: 0.5 },
-                          scale: { duration: 0.5, type: 'spring' },
-                          rotate: { duration: 25 + i * 5, repeat: Infinity, ease: 'linear' },
-                        }}
-                        className="absolute z-20 w-20 h-20 md:w-28 md:h-28 object-contain blur-[1px]"
-                      />
-                    )
-                  })}
+                  {isActive && (
+                    <motion.img
+                      src={slide.floatingImg}
+                      alt=""
+                      aria-hidden="true"
+                      initial={{ opacity: 0, scale: 0.92 }}
+                      animate={{ opacity: 0.9, scale: [1, 1.08, 1] }}
+                      exit={{ opacity: 0, scale: 0.92 }}
+                      transition={{
+                        opacity: { duration: 0.5 },
+                        scale: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+                      }}
+                      className={`absolute z-20 object-contain pointer-events-none ${slide.imageClass}`}
+                    />
+                  )}
                 </AnimatePresence>
              </div>
           )
