@@ -215,12 +215,10 @@ export default function MenuSection() {
                     aria-pressed={isActive}
                     className="group relative flex h-[122px] w-full items-center overflow-hidden rounded-[1.65rem] border border-white/55 p-3 text-left shadow-[0_14px_32px_rgba(45,31,30,0.12)] backdrop-blur-2xl transition-transform duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current sm:h-[146px] sm:rounded-[2rem] sm:p-4"
                     style={{
-                      backgroundColor: `${item.cardBackground}cc`,
-                      color: item.ink,
+                      backgroundColor: "#582f0e",
                       transform: isActive ? "translateY(-8px)" : "translateY(0)",
                     }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/45 via-white/10 to-transparent" />
                     <img
                       src={item.image}
                       alt=""
@@ -229,10 +227,10 @@ export default function MenuSection() {
                       className="relative z-10 h-full w-[47%] object-contain transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="relative z-10 flex min-w-0 flex-1 flex-col justify-between self-stretch py-1 pl-1">
-                      <p className="line-clamp-2 font-oswald text-lg font-semibold uppercase leading-[0.92] tracking-[-0.025em] sm:text-xl">
+                      <p className="line-clamp-2 font-oswald text-lg font-semibold uppercase leading-[0.92] tracking-[-0.025em] text-white sm:text-xl">
                         {item.title}
                       </p>
-                      <span className="w-fit rounded-full bg-white/55 px-2.5 py-1 text-xs font-bold backdrop-blur-md">
+                      <span className="w-fit rounded-full bg-white/55 px-2.5 py-1 text-xs font-bold text-[#582f0e] backdrop-blur-md">
                         {item.price}
                       </span>
                     </div>
