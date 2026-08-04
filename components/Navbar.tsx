@@ -25,6 +25,11 @@ const glassOptions = {
 export default function Navbar() {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
+  const handleTabChange = (id: string) => {
+    setActiveTab(id);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <>
     <div className="fixed bg-[#110a06] left-4 top-4 z-50 h-auto w-15 md:left-8 md:top-6 md:w-18 py-2.5 rounded-[50%]">
@@ -50,7 +55,7 @@ export default function Navbar() {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 className={`relative px-2 py-1 text-sm font-semibold tracking-wide transition-colors ${isActive ? 'text-white' : 'text-white/70 hover:text-white'}`}
               >
                 {tab.label}
@@ -81,7 +86,7 @@ export default function Navbar() {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 className="relative flex flex-1 flex-col items-center justify-center py-3 text-xs"
               >
                 {isActive && (
