@@ -70,7 +70,7 @@ export default function Carousel() {
       </AnimatePresence>
 
       {/* Big Stretch Text */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-0 flex -translate-y-[8vh] items-center justify-center overflow-hidden pointer-events-none md:translate-y-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -112,7 +112,7 @@ export default function Carousel() {
           // A product returning from the left slot is repositioned on the right
           // so it never travels across the active product during the wrap.
           const visualState = isActive
-            ? { x: '0vw', y: isSmallScreen ? '7vh' : '0vh', scale: 1, opacity: 1 }
+            ? { x: '0vw', y: isSmallScreen ? '-8vh' : '0vh', scale: isSmallScreen ? 1.1 : 1, opacity: 1 }
             : isLeft
               ? { x: '-31vw', y: isSmallScreen ? '30vh' : '25vh', scale: 0.34, opacity: 0.9 }
               : { x: '31vw', y: isSmallScreen ? '30vh' : '25vh', scale: 0.34, opacity: 0.9 };
@@ -155,13 +155,13 @@ export default function Carousel() {
                       alt=""
                       aria-hidden="true"
                       initial={{ opacity: 0, scale: 0.92 }}
-                      animate={{ opacity: 0.9, scale: [1, 1.08, 1] }}
+                      animate={{ opacity: 0.9, scale: isSmallScreen ? (slide.id === 1 ? [1.65, 1.75, 1.65] : [1.28, 1.38, 1.28]) : [1, 1.08, 1] }}
                       exit={{ opacity: 0, scale: 0.92 }}
                       transition={{
                         opacity: { duration: 0.5 },
                         scale: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
                       }}
-                      className={`absolute z-20 object-contain pointer-events-none ${slide.imageClass}`}
+                      className={`absolute z-20 -translate-y-[8vh] object-contain pointer-events-none md:translate-y-0 ${slide.imageClass}`}
                     />
                   )}
                 </AnimatePresence>

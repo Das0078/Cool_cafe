@@ -12,7 +12,7 @@ export default function CurvyMarquee() {
           curveAmount={-80}
           direction="right"
           interactive
-          className="fill-[#b79d8b] text-[1.25rem] tracking-[0.18em] md:text-[1.75rem] md:tracking-[0.2em]"
+          className="fill-[#ffffff] text-[1.25rem] tracking-[0.18em] md:text-[1.75rem] md:tracking-[0.2em]"
         />
       </div>
     </div>

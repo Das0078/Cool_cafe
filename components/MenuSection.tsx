@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownRight } from "lucide-react";
 import type { Swiper as SwiperType } from "swiper";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -121,12 +120,6 @@ export default function MenuSection() {
       </AnimatePresence>
 
       <div className="mx-auto flex min-h-[calc(100svh-8rem)] w-full max-w-6xl flex-col justify-between gap-8">
-        <div className="flex items-center justify-between" style={{ color: activeItem.ink }}>
-          <p className="text-xs font-bold uppercase tracking-[0.2em]">Cafe Cool / Menu</p>
-          <p className="hidden text-xs font-medium uppercase tracking-[0.17em] sm:block">Swipe to explore</p>
-          <ArrowDownRight className="sm:hidden" size={20} strokeWidth={1.6} />
-        </div>
-
         <div className="grid flex-1 items-center gap-1 md:grid-cols-[minmax(0,0.95fr)_minmax(340px,1.05fr)] md:gap-8">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
@@ -167,7 +160,7 @@ export default function MenuSection() {
                 src={activeItem.image}
                 alt={activeItem.title}
                 draggable={false}
-                className="relative z-10 h-full w-full object-contain drop-shadow-[0_24px_24px_rgba(47,32,26,0.19)]"
+                className="relative z-10 h-[112%] w-[112%] object-contain drop-shadow-[0_24px_24px_rgba(47,32,26,0.19)] md:h-full md:w-full"
                 animate={{ y: [0, -9, 0] }}
                 transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
               />

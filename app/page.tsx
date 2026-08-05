@@ -27,7 +27,7 @@ export default function Page() {
               curveAmount={-45}
               direction="right"
               interactive={false}
-              className="fill-[#b79d8b] text-[5.15rem] tracking-[0.12em]"
+              className="fill-[#ffffff] text-[5.15rem] tracking-[0.12em]"
             />
           </div>
           <section id="home" className="relative h-screen overflow-hidden">
