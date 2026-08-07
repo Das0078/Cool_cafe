@@ -236,6 +236,6 @@ export default function MenuSection() {
 
         {/* <div className='border-2 border-red-500 h-[400px] w-[350px]'>hello</div> */}
       </div>
-    </section>+---
+    </section>
   );
 }
