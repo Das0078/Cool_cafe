@@ -37,8 +37,61 @@ body {
   letter-spacing: -0.02em;
 }
 
+.about-section-heading {
+  padding-inline: clamp(1.5rem, 8.9vw, 9rem);
+}
+
+.about-card-slider {
+  padding-inline: clamp(1.5rem, 8.9vw, 9rem) !important;
+}
+
+.about-card-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.9rem;
+  padding-inline: clamp(1.5rem, 8.9vw, 9rem);
+}
+
+.about-card-control {
+  display: grid;
+  width: 3.75rem;
+  height: 3.75rem;
+  place-items: center;
+  border: 1px solid rgb(17 10 6 / 12%);
+  border-radius: 9999px;
+  color: #110a06;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 8px 18px rgb(17 10 6 / 10%);
+  transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.about-card-control:hover {
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgb(17 10 6 / 16%);
+  transform: translateY(-2px);
+}
+
+.about-card-control:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.about-card-control:focus-visible {
+  outline: 2px solid #110a06;
+  outline-offset: 3px;
+}
+
 @media (max-width: 767px) {
   .text-stretch {
     transform: scaleX(1.45) scaleY(2.1);
+  }
+
+  .about-card-controls {
+    margin-top: 1.5rem;
+  }
+
+  .about-card-control {
+    width: 3.25rem;
+    height: 3.25rem;
   }
 }

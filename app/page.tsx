@@ -7,6 +7,7 @@ import Carousel from '@/components/Carousel';
 import CurvyMarquee from '@/components/CurvyMarquee';
 import CurvedLoop from '@/components/CurvedLoop';
 import MenuSection from '@/components/MenuSection';
+import AboutSection from '@/components/about/AboutSection';
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
@@ -35,6 +36,7 @@ export default function Page() {
             <CurvyMarquee />
           </section>
           <MenuSection />
+          <AboutSection />
         </>
       )}
     </main>
