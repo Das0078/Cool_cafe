@@ -125,7 +125,7 @@ export default function ContactSection() {
           transition={{ duration: 1.05, delay: 0.52, ease: [0.22, 1, 0.36, 1] }}
           className="pointer-events-none absolute bottom-0 right-1 z-30 w-[112px] sm:right-[4vw] sm:w-[188px] md:right-[6vw] md:w-[236px]"
         >
-          <Image src={chef} alt="" aria-hidden="true" priority={false} className="h-[22vh] md:h-[35vh] z-[99] w-full" />
+          <Image src={chef} alt="" aria-hidden="true" priority={false} className="h-[18vh] md:h-[35vh] z-[99] w-full" />
         </motion.div>
       </div>
 
