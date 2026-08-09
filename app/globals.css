@@ -81,6 +81,36 @@ body {
   outline-offset: 3px;
 }
 
+.testimonial-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.testimonial-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: testimonial-scroll 52s linear infinite;
+}
+
+.testimonial-marquee-group {
+  display: flex;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+.testimonial-marquee:hover .testimonial-marquee-track,
+.testimonial-marquee:focus-within .testimonial-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes testimonial-scroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (max-width: 767px) {
   .text-stretch {
     transform: scaleX(1.45) scaleY(2.1);
@@ -93,5 +123,17 @@ body {
   .about-card-control {
     width: 3.25rem;
     height: 3.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .testimonial-marquee-track {
+    animation: none;
   }
 }

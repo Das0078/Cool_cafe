@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Home, Coffee, Info, Phone } from 'lucide-react';
 import Image from 'next/image';
@@ -24,6 +24,20 @@ const glassOptions = {
 
 export default function Navbar() {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (Math.abs(delta) < 8) return;
+      setHidden(y > 120 && delta > 0);
+      lastY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleTabChange = (id: string) => {
     setActiveTab(id);
@@ -45,7 +59,7 @@ export default function Navbar() {
       {/* Desktop Top Nav */}
       <LiquidGlass
         {...glassOptions}
-        className="hidden md:block"
+        className={`hidden md:block transition-transform duration-500 ease-out ${hidden ? '-translate-y-40' : 'translate-y-0'}`}
         padding="0"
         style={{ position: 'fixed', top: '3.5rem', left: '50%', zIndex: 50 }}
       >
@@ -75,11 +89,11 @@ export default function Navbar() {
       {/* Mobile Bottom Floating Nav */}
       <LiquidGlass
         {...glassOptions}
-        className="md:hidden"
+        className={`md:hidden transition-transform duration-500 ease-out ${hidden ? 'translate-y-40' : 'translate-y-0'}`}
         padding="0"
-        style={{ position: 'fixed', top: 'calc(100dvh - 4rem)', left: '50%', zIndex: 50 }}
+        style={{ position: 'fixed', top: 'calc(100dvh - 4.5rem)', left: '50%', zIndex: 50 }}
       >
-        <nav className="flex w-[calc(100vw-2rem)] items-center justify-between p-2 shadow-2xl">
+        <nav className="flex items-center gap-2 rounded-full bg-[#2b1a10] p-2 shadow-2xl">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -87,19 +101,19 @@ export default function Navbar() {
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className="relative flex flex-1 flex-col items-center justify-center py-3 text-xs"
+                className="relative flex flex-1 flex-col items-center justify-center rounded-full px-4 py-2.5"
               >
                 {isActive && (
                   <motion.div
                     layoutId="mobile-active-tab"
-                    className="absolute inset-0 rounded-xl bg-white/20"
+                    className="absolute inset-0 rounded-full bg-[#e8b4a0]/20"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <span className="relative z-10 flex flex-col items-center space-y-1">
-                  <Icon size={20} className={isActive ? "text-white" : "text-white/60"} />
-                  <span className={isActive ? "text-white font-semibold" : "text-white/60"}>
-                    {tab.label}
+                <span className="relative z-10 flex flex-col items-center space-y-0.5">
+                  <Icon size={18} strokeWidth={1.8} className={isActive ? "text-[#eec7b8]" : "text-[#b79d8b]/70"} />
+                  <span className={`text-[9px] tracking-widest ${isActive ? "text-[#eec7b8] font-semibold" : "text-[#b79d8b]/70"}`}>
+                    {tab.label.toUpperCase()}
                   </span>
                 </span>
               </button>

@@ -6,6 +6,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import pattern from "@/assets/svg_bg.png";
 
 const menuItems = [
   {
@@ -119,7 +120,13 @@ export default function MenuSection() {
         />
       </AnimatePresence>
 
-      <div className="mx-auto flex min-h-[calc(100svh-8rem)] w-full max-w-6xl flex-col justify-between gap-8">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 bg-repeat opacity-20"
+        style={{ backgroundImage: `url(${pattern.src})`, backgroundSize: "min(34vw, 470px) auto" }}
+      />
+
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-8rem)] w-full max-w-6xl flex-col justify-between gap-8">
         <div className="grid flex-1 items-center gap-1 md:grid-cols-[minmax(0,0.95fr)_minmax(340px,1.05fr)] md:gap-8">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div

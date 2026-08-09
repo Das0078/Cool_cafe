@@ -7,7 +7,7 @@ type AboutCardProps = {
 
 export function AboutCard({ image, title }: AboutCardProps) {
   return (
-    <article className="group relative h-[320px] w-[280px] overflow-hidden rounded-[1.8rem] bg-black shadow-[0_18px_35px_rgba(17,10,6,0.2)] sm:h-[366px] sm:w-[320px] sm:rounded-[2rem] md:h-[400px] md:w-[350px]">
+    <article className="group relative h-[320px] w-[280px] overflow-hidden rounded-[1.8rem] bg-black  sm:h-[366px] sm:w-[320px] sm:rounded-[2rem] md:h-[400px] md:w-[350px]">
       <Image
         src={image}
         alt={title}
