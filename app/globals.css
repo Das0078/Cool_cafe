@@ -126,6 +126,63 @@ body {
   }
 }
 
+/* ── Contact card: square on mobile, rectangular on desktop ── */
+.contact-card {
+  aspect-ratio: 1 / 1.15;
+}
+
+@media (min-width: 768px) {
+  .contact-card {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* ── Map container fills remaining card space ── */
+.contact-map-container {
+  height: 100%;
+  min-height: 180px;
+}
+
+/* On mobile, make the map take available height */
+@media (max-width: 767px) {
+  .contact-map-container {
+    min-height: 200px;
+    height: 48vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .contact-map-container {
+    min-height: 280px;
+    height: 100%;
+  }
+}
+
+/* ── Social icons marquee ── */
+.social-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: social-scroll 25s linear infinite;
+}
+
+.social-marquee-group {
+  display: flex;
+  gap: 0;
+  padding-right: 0;
+}
+
+/* Pause on hover */
+.social-marquee-wrapper:hover .social-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes social-scroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .testimonial-marquee {
     overflow-x: auto;
@@ -135,5 +192,15 @@ body {
 
   .testimonial-marquee-track {
     animation: none;
+  }
+
+  .social-marquee-track {
+    animation: none;
+  }
+
+  .social-marquee-wrapper {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
