@@ -4,8 +4,11 @@ export default function AboutSection() {
   return (
     <section
       id="about"
+      style={{
+        background:'linear-gradient(to right, #fffcdc, #d9a7c7)'
+      }}
       aria-labelledby="about-heading"
-      className="relative overflow-hidden bg-[#F9B637] py-16 text-[#110a06] sm:py-20 md:py-24"
+      className="relative overflow-hidden py-16 text-[#110a06] sm:py-20 md:py-24"
     >
       <div className="about-section-heading">
         <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#110a06]/60 sm:text-sm">

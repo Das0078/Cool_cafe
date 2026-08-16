@@ -215,7 +215,7 @@ export default function MenuSection() {
                     aria-pressed={isActive}
                     className="group relative flex h-[122px] w-full items-center overflow-hidden rounded-[1.65rem] border border-white/55 p-3 text-left shadow-[0_14px_32px_rgba(45,31,30,0.12)] backdrop-blur-2xl transition-transform duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current sm:h-[146px] sm:rounded-[2rem] sm:p-4"
                     style={{
-                      backgroundColor: "#582f0e",
+                      background: "linear-gradient(to right, #f2c94c, #f2994a)",
                       transform: isActive ? "translateY(-8px)" : "translateY(0)",
                     }}
                   >
