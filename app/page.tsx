@@ -10,6 +10,7 @@ import MenuSection from '@/components/MenuSection';
 import AboutSection from '@/components/about/AboutSection';
 import Testimonials from '@/components/Testimonials';
 import ContactSection from '@/components/ContactSection';
+import { heroImages } from '@/lib/slides';
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ export default function Page() {
   return (
     <main className="relative w-full overflow-x-hidden bg-[#110a06]">
       <AnimatePresence>
-        {loading && <Loader onComplete={() => setLoading(false)} />}
+        {loading && <Loader onComplete={() => setLoading(false)} images={heroImages} />}
       </AnimatePresence>
 
       {!loading && (

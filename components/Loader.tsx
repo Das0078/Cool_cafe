@@ -3,24 +3,64 @@ import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import cafeCoolLogo from '@/assets/logo/only_image.png';
-import pattern from '@/assets/svg_bg.png';
 
-export default function Loader({ onComplete }: { onComplete: () => void }) {
+const bubbles = [
+  { size: 40, left: '10%', duration: 8, delay: 0 },
+  { size: 20, left: '20%', duration: 5, delay: 1 },
+  { size: 50, left: '35%', duration: 7, delay: 2 },
+  { size: 80, left: '50%', duration: 11, delay: 0 },
+  { size: 35, left: '55%', duration: 6, delay: 1 },
+  { size: 45, left: '65%', duration: 8, delay: 3 },
+  { size: 90, left: '70%', duration: 12, delay: 2 },
+  { size: 25, left: '80%', duration: 6, delay: 2 },
+  { size: 15, left: '70%', duration: 5, delay: 1 },
+  { size: 90, left: '25%', duration: 10, delay: 4 },
+];
+
+export default function Loader({ onComplete, images }: { onComplete: () => void; images: string[] }) {
   const [progress, setProgress] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(images.length === 0);
+
+  useEffect(() => {
+    let loaded = 0;
+    let settled = false;
+    const markLoaded = () => {
+      loaded += 1;
+      if (!settled && loaded >= images.length) {
+        settled = true;
+        setImagesLoaded(true);
+      }
+    };
+
+    if (images.length === 0) {
+      setImagesLoaded(true);
+      return;
+    }
+
+    images.forEach((src) => {
+      const img = new window.Image();
+      img.onload = markLoaded;
+      img.onerror = markLoaded;
+      img.src = src;
+    });
+  }, [images]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress(p => {
-        if (p >= 100) {
-          clearInterval(timer);
-          setTimeout(onComplete, 400);
-          return 100;
-        }
-        return p + 4;
+        if (imagesLoaded) return Math.min(100, p + 4);
+        return Math.min(95, p + 2);
       });
     }, 40);
     return () => clearInterval(timer);
-  }, [onComplete]);
+  }, [imagesLoaded]);
+
+  useEffect(() => {
+    if (progress >= 100 && imagesLoaded) {
+      const timer = setTimeout(onComplete, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [progress, imagesLoaded, onComplete]);
 
   return (
     <motion.div 
@@ -28,13 +68,21 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       exit={{ y: "-100%", opacity: 0 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
     >
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-20"
-        style={{ backgroundImage: `url(${pattern.src})`, backgroundRepeat: 'repeat', backgroundSize: '360px auto' }}
-        animate={{ backgroundPositionX: ['0px', '-360px'] }}
-        transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
-      />
+      <div className="bubbles" aria-hidden="true">
+        {bubbles.map((bubble, i) => (
+          <span
+            key={i}
+            className="bubble"
+            style={{
+              width: bubble.size,
+              height: bubble.size,
+              left: bubble.left,
+              animationDuration: `${bubble.duration}s`,
+              animationDelay: `${bubble.delay}s`,
+            }}
+          />
+        ))}
+      </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center">
         <motion.div

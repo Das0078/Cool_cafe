@@ -111,6 +111,36 @@ body {
   }
 }
 
+/* ── Loader bubbles ── */
+.bubbles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -120px;
+  border-radius: 50%;
+  background: #e87a60;
+  opacity: 0.5;
+  animation: bubble-rise 10s infinite ease-in;
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(100px, -55vh, 0);
+  }
+  100% {
+    transform: translate3d(-200px, -120vh, 0);
+  }
+}
+
 @media (max-width: 767px) {
   .text-stretch {
     transform: scaleX(1.45) scaleY(2.1);
