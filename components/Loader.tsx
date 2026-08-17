@@ -17,6 +17,18 @@ const bubbles = [
   { size: 90, left: '25%', duration: 10, delay: 4 },
 ];
 
+const hollowBubbles = [
+  { size: 60, left: '5%', duration: 9, delay: 0.5 },
+  { size: 30, left: '15%', duration: 6, delay: 2.5 },
+  { size: 70, left: '30%', duration: 10, delay: 1.5 },
+  { size: 45, left: '42%', duration: 7, delay: 3.5 },
+  { size: 100, left: '58%', duration: 13, delay: 0.8 },
+  { size: 55, left: '68%', duration: 9, delay: 2 },
+  { size: 25, left: '76%', duration: 5, delay: 1 },
+  { size: 80, left: '88%', duration: 11, delay: 3 },
+  { size: 35, left: '92%', duration: 7, delay: 0.5 },
+];
+
 export default function Loader({ onComplete, images }: { onComplete: () => void; images: string[] }) {
   const [progress, setProgress] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(images.length === 0);
@@ -73,6 +85,19 @@ export default function Loader({ onComplete, images }: { onComplete: () => void;
           <span
             key={i}
             className="bubble"
+            style={{
+              width: bubble.size,
+              height: bubble.size,
+              left: bubble.left,
+              animationDuration: `${bubble.duration}s`,
+              animationDelay: `${bubble.delay}s`,
+            }}
+          />
+        ))}
+        {hollowBubbles.map((bubble, i) => (
+          <span
+            key={`hollow-${i}`}
+            className="bubble-outline"
             style={{
               width: bubble.size,
               height: bubble.size,

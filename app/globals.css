@@ -129,6 +129,15 @@ body {
   animation: bubble-rise 10s infinite ease-in;
 }
 
+.bubble-outline {
+  position: absolute;
+  bottom: -120px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(232, 122, 96, 0.4);
+  animation: bubble-rise 10s infinite ease-in;
+}
+
 @keyframes bubble-rise {
   0% {
     transform: translate3d(0, 0, 0);
